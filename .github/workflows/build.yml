@@ -55,6 +55,12 @@ jobs:
           echo "hash=$(cut -d' ' -f1 < sha256sum.txt)" >> $GITHUB_OUTPUT
         shell: 'C:/shells/msys2bash.cmd {0}'
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunspell-windows-${{ env.HUNSPELL_VERSION }}
+          path: hunspell/hunspell-${{ env.HUNSPELL_VERSION }}.7z
+    
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')  # Only run if there's a tag
         uses: ncipollo/release-action@v1
